@@ -1,18 +1,26 @@
 <script setup>
+
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+const auth = getAuth();
+const login = () => {
+signInWithEmailAndPassword(auth, email.value, password.value)
+  .then((userCredential) => {
+    console.log(userCredential.user);
+    router.push("./purchase");
+  })
+  .catch((error) => {
+    console.log(error.code);
+    console.log(error.message);
+  });
+}
 const router = useRouter();
-const username = ref("");
+const email = ref("");
 const password = ref("");
 const invalid = ref(false);
-const login = () => {
-  if (username.value === "tmdb" && password.value === "movies") {
-    router.push("./purchase");
-  }
-  else {
-    invalid.value = true;
-  }
-};
+
 </script>
 
 <template>
@@ -20,13 +28,11 @@ const login = () => {
     <h1>Login</h1>
     <div class="popup">
       <form @submit.prevent="login()">
-        <input class="user" type="text" placeholder="Username" v-model="username" />
+        <input class="email" type="email" placeholder="Email" v-model="email" />
         <input class="pass" type="password" placeholder="Password" v-model="password" />
         <input class="submit" type="submit" value="Login" />
+        <button @click="login">login</button>
       </form>
-      <div class="invalid" v-if="invalid">
-        <p>Invalid Username or Password</p>
-      </div>
     </div>
   </div>
 </template>
@@ -39,6 +45,7 @@ const login = () => {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 h1 {
   position: absolute;
   margin-top: 260px;
@@ -47,6 +54,7 @@ h1 {
   z-index: 1;
   font-size: 2.5vw;
 }
+
 .popup {
   position: absolute;
   background-color: rgba(0, 0, 0, 0.834);
@@ -55,6 +63,7 @@ h1 {
   height: 500px;
   width: 30vw;
 }
+
 form {
   position: absolute;
   display: flex;
@@ -64,35 +73,42 @@ form {
   height: 500px;
   width: 23vw;
 }
+
 input {
   padding: 15px;
   border-radius: 8px;
   background-color: rgb(61, 61, 61);
-  font-weight: bold;  
+  font-weight: bold;
   color: white;
 }
-.user {
+
+.email {
   margin-bottom: 10px;
   border: 5px;
 }
+
 .pass {
   margin-top: 10px;
   margin-bottom: 50px;
   border: 5px;
 }
+
 .submit {
   border: 5px;
   color: rgb(186, 186, 186);
 }
+
 .submit:hover {
   cursor: pointer;
 }
+
 .invalid {
   margin-top: 400px;
   margin-left: 4.2vw;
   color: rgb(240, 199, 52);
   font-size: 20px;
 }
+
 input::placeholder {
   color: rgb(186, 186, 186);
 }

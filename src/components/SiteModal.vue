@@ -1,9 +1,11 @@
 <script setup>
 import axios from "axios"
 import { useStore } from '../store/index.js'
+
 const store = useStore();
 const props = defineProps(["id"]);
 const emits = defineEmits(["toggleModal"]);
+
 let modalData =
   (await axios.get(`https://api.themoviedb.org/3/movie/${props.id}`, {
     params: {
