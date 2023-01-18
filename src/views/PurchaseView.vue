@@ -34,7 +34,7 @@ const search = async (direction) => {
   let data = (
     await axios.get("https://api.themoviedb.org/3/search/movie", {
       params: {
-        api_key: "Your Key",
+        api_key: "e8016904e176c4cc2f25acfd19077f5c",
         query: criteria.value,
         include_adult: false,
         page: page.value,
