@@ -12,7 +12,7 @@ let modalData =
       api_key: "e8016904e176c4cc2f25acfd19077f5c",
     }
   })).data;
-console.log(store.cart)
+
 </script>
 
 <template>
@@ -28,8 +28,10 @@ console.log(store.cart)
         <p4>Vote Count: {{ modalData.vote_count }}</p4>
         <p5>{{ modalData.overview }}</p5>
         <button class="buy-button" @click="store.addToCart(props.id, {
+          id: modalData.id,
+          date: modalData.release_date,
           poster: `https://image.tmdb.org/t/p/w500${modalData.poster_path}`,
-          title: modalData.title
+          title: modalData.title,
         })">Purchase</button>
       </div>
     </div>
@@ -48,6 +50,7 @@ console.log(store.cart)
   background: rgba(0, 0, 0, 0.701);
   z-index: 3;
 }
+
 .modal-inner-container {
   margin-left: 19vw;
   margin-top: 235px;
@@ -56,6 +59,7 @@ console.log(store.cart)
   height: 400px;
   color: white;
 }
+
 .modal-outer-container .modal-inner-container .close-button {
   position: absolute;
   right: 240px;
@@ -66,45 +70,55 @@ console.log(store.cart)
   font-size: 2vw;
   color: rgb(240, 199, 52);
 }
-.close-button, .buy-button:hover {
+
+.close-button,
+.buy-button:hover {
   cursor: pointer;
 }
+
 h1 {
   text-align: center;
   padding: 10px;
 }
+
 img {
   position: absolute;
   margin-left: 15px;
   width: 16.5vw;
   aspect-ratio: 9/14;
 }
+
 p1 {
   position: absolute;
   margin-left: 250px;
   margin-top: 15px;
 }
+
 p2 {
   position: absolute;
   margin-left: 590px;
   margin-top: 15px;
 }
+
 p3 {
   position: absolute;
   margin-left: 250px;
   margin-top: 65px;
 }
+
 p4 {
   position: absolute;
   margin-left: 590px;
   margin-top: 65px;
 }
+
 p5 {
   position: absolute;
   margin-left: 250px;
   margin-right: 300px;
   margin-top: 120px;
 }
+
 .buy-button {
   position: absolute;
   margin-left: 450px;
@@ -114,6 +128,7 @@ p5 {
   font-weight: bolder;
   background-color: rgb(240, 199, 52);
 }
+
 a {
   position: absolute;
   margin-left: 430px;

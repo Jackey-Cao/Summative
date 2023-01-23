@@ -21,11 +21,13 @@
   font-weight: bolder;
   background-color: rgb(240, 199, 52);
 }
+
 p {
   position: absolute;
   margin-left: 90%;
   padding-top: 30px;
 }
+
 a1 {
   position: absolute;
   padding-top: 7px;

@@ -5,7 +5,7 @@ import SiteModal from "../components/SiteModal.vue";
 import { useStore } from "../store/index.js";
 
 const store = useStore();
-const genre = ref(28);
+const genre = ref(0);
 const criteria = ref("");
 const searchResults = ref([]);
 const page = ref(1);
@@ -51,18 +51,16 @@ const search = async (direction) => {
     };
   });
 };
-
-// SHOULD ONLY BE RUN ONCE!!!!
-// await store.populateFirestore();
 </script>
 
 <template>
-  <input type="search" v-model="criteria" @keydown.enter="search(0)" />
-  <br />
   <RouterLink to="/cart" custom v-slot="{ navigate }">
-    <button @click="navigate" role="link">Cart</button>
+    <button class="cart" @click="navigate" role="link">Cart</button>
   </RouterLink>
-  <br />
+  <h1>Purchase</h1>
+  <input type="search" v-model="criteria" @keydown.enter="search(0)" />
+  <button class="enter" @click="search(0)">Search</button>
+  <p class="genre">Select Genre</p>
   <select v-model="genre" @change="getGenres()">
     <option value="Action">Action</option>
     <option value="Family">Family</option>
@@ -72,46 +70,151 @@ const search = async (direction) => {
   </select>
   <template v-if="searchResults.length">
     <div class="navigation">
-      <button v-show="page > 1" @click="search(-1)">Prev</button>
-      <h1>{{ `Page ${page} of ${totalPages}` }}</h1>
-      <button v-show="page < totalPages" @click="search(1)">Next</button>
+      <button class="prev" v-show="page > 1" @click="search(-1)">&lt</button>
+      <p class="page">{{ `Page ${page} of ${totalPages}` }}</p>
+      <button class="next" v-show="page < totalPages" @click="search(1)">&gt</button>
     </div>
   </template>
   <div class="purchase-container">
     <template v-if="searchResults.length">
-      <img
-        v-for="movie in searchResults"
-        :id="movie.id"
-        @click="openModal(movie.id)"
-        :src="`https://image.tmdb.org/t/p/w500${movie.image}`"
-      />
+      <p class="info">Displaying Results For "{{ criteria }}"</p>
+      <img v-for="movie in searchResults" :id="movie.id" @click="openModal(movie.id)"
+        :src="`https://image.tmdb.org/t/p/w500${movie.image}`" />
     </template>
     <template v-else>
-      <img
-        v-for="movie in store.movies"
-        :id="movie.id"
-        @click="openModal(movie.id)"
-        :src="`https://image.tmdb.org/t/p/w500${movie.image}`"
-      />
+      <img v-for="movie in store.movies" :id="movie.id" @click="openModal(movie.id)"
+        :src="`https://image.tmdb.org/t/p/w500${movie.image}`" />
     </template>
     <SiteModal v-if="showModal" @toggleModal="closeModal()" :id="selectedId" />
   </div>
 </template>
 
 <style scoped>
+h1 {
+  position: absolute;
+  font-size: 3vw;
+  margin-left: 25px;
+  margin-top: 15px;
+  color: rgb(240, 199, 52);
+}
+
+.genre {
+  position: absolute;
+  font-size: 1vw;
+  margin-left: 25px;
+  margin-top: 105px;
+  color: rgb(240, 199, 52);
+}
+
+.cart {
+  position: absolute;
+  text-align: center;
+  background-color: rgb(240, 199, 52);
+  width: 80px;
+  height: 40px;
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  border-radius: 10px;
+  margin-left: 91.5%;
+  margin-top: 25px;
+}
+
+.info {
+  position: absolute;
+  color: rgb(240, 199, 52);
+  font-size: 2vw;
+  margin-left: 14.1vw;
+  margin-top: 98px;
+}
+
+img:hover,
+.cart:hover,
+.enter,
+.prev,
+.next {
+  cursor: pointer;
+  opacity: 70%;
+}
+
 .purchase-container {
+  margin-top: 150px;
+  margin-left: 5.5rem;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 }
 
 img {
-  width: 200px;
+  width: 250px;
   aspect-ratio: 2 / 3;
 }
 
+input {
+  position: absolute;
+  margin-left: 20vw;
+  margin-top: 25px;
+  padding: 7px;
+  border-radius: 10px;
+  width: 60vw;
+}
+
+.enter {
+  position: absolute;
+  text-align: center;
+  margin-left: 81vw;
+  margin-top: 25px;
+  background-color: white;
+  padding: 7px;
+  border-radius: 10px;
+  width: 5vw;
+  font-size: 1vw;
+}
+
+select {
+  position: absolute;
+  background-color: rgb(240, 199, 52);
+  border-radius: 5px;
+  padding: 3px;
+  margin-left: 130px;
+  margin-top: 100px;
+  font-size: 1vw;
+}
+
+option {
+  font-weight: bolder;
+}
+
 .navigation {
-  display: flex;
-  justify-content: space-between;
+  position: absolute;
+  margin-top: 280vh;
+
+}
+
+.prev,
+.next {
+  background-color: rgb(240, 199, 52);
+  font-weight: bolder;
+  padding: 10px;
+  position: absolute;
+  border-radius: 100px;
+  font-size: 2vw;
+}
+
+.prev {
+  margin-left: 41vw;
+}
+
+.next {
+  margin-left: 56vw;
+}
+
+.page {
+  position: absolute;
+  text-align: center;
+  margin-top: 17px;
+  margin-left: 45vw;
+  width: 10vw;
+  color: rgb(240, 199, 52);
 }
 </style>

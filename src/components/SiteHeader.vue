@@ -14,15 +14,17 @@
 </template>
 
 <style scoped>
-.header{
+.header {
   margin-top: 15px;
 }
+
 h1 {
   color: rgb(240, 199, 52);
   text-align: left;
   font-size: 40px;
   margin-left: 25px;
 }
+
 button {
   position: absolute;
   text-align: center;
@@ -35,6 +37,7 @@ button {
   margin-right: 10px;
   margin-left: 93%;
 }
+
 .login {
   position: absolute;
   text-align: center;
@@ -47,6 +50,7 @@ button {
   margin-right: 10px;
   margin-left: 86%;
 }
+
 button:hover {
   cursor: pointer;
   opacity: 70%;
