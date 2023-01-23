@@ -21,14 +21,14 @@ const registerUserByEmail = async () => {
   }
   else {
     await createUserWithEmailAndPassword(auth, email.value, password1.value);
-    router.push('./login')
+    router.push('./purchase')
   }
 };
 
 const registerUserByGoogle = async () => {
   const provider = new GoogleAuthProvider();
   await signInWithPopup(auth, provider);
-  router.push('./login')
+  router.push('./purchase')
 };
 </script>
 
