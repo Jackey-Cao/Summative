@@ -54,44 +54,50 @@ const search = async (direction) => {
 </script>
 
 <template>
-  <RouterLink to="/cart" custom v-slot="{ navigate }">
-    <button class="cart" @click="navigate" role="link">Cart</button>
-  </RouterLink>
-  <h1>Purchase</h1>
-  <input type="search" v-model="criteria" @keydown.enter="search(0)" />
-  <button class="enter" @click="search(0)">Search</button>
-  <p class="genre">Select Genre</p>
-  <select v-model="genre" @change="getGenres()">
-    <option value="Action">Action</option>
-    <option value="Family">Family</option>
-    <option value="Science Fiction">Science Fiction</option>
-    <option value="Adventure">Adventure</option>
-    <option value="Fantasy">Fantasy</option>
-  </select>
-  <template v-if="searchResults.length">
-    <div class="navigation">
-      <button class="prev" v-show="page > 1" @click="search(-1)">&lt</button>
-      <p class="page">{{ `Page ${page} of ${totalPages}` }}</p>
-      <button class="next" v-show="page < totalPages" @click="search(1)">&gt</button>
+  <div class="background">
+    <input type="search" v-model="criteria" @keydown.enter="search(0)" />
+    <button class="enter" @click="search(0)">Search</button>
+    <RouterLink to="/cart" custom v-slot="{ navigate }">
+      <button class="cart" @click="navigate" role="link">Cart</button>
+    </RouterLink>
+    <h1>Purchase</h1>
+
+    <p class="genre">Select Genre</p>
+    <select v-model="genre" @change="getGenres()">
+      <option value="Action">Action</option>
+      <option value="Family">Family</option>
+      <option value="Science Fiction">Science Fiction</option>
+      <option value="Adventure">Adventure</option>
+      <option value="Fantasy">Fantasy</option>
+    </select>
+    <div class="purchase-container">
+      <template v-if="searchResults.length">
+        <p class="info">Displaying Results For "{{ criteria }}"</p>
+        <img v-for="movie in searchResults" :id="movie.id" @click="openModal(movie.id)"
+          :src="`https://image.tmdb.org/t/p/w500${movie.image}`" />
+      </template>
+      <template v-else>
+        <img v-for="movie in store.movies" :id="movie.id" @click="openModal(movie.id)"
+          :src="`https://image.tmdb.org/t/p/w500${movie.image}`" />
+      </template>
+      <SiteModal v-if="showModal" @toggleModal="closeModal()" :id="selectedId" />
     </div>
-  </template>
-  <div class="purchase-container">
     <template v-if="searchResults.length">
-      <p class="info">Displaying Results For "{{ criteria }}"</p>
-      <img v-for="movie in searchResults" :id="movie.id" @click="openModal(movie.id)"
-        :src="`https://image.tmdb.org/t/p/w500${movie.image}`" />
+      <div class="navigation">
+        <button class="prev" v-show="page > 1" @click="search(-1)">&lt</button>
+        <p class="page">{{ `Page ${page} of ${totalPages}` }}</p>
+        <button class="next" v-show="page < totalPages" @click="search(1)">&gt</button>
+      </div>
     </template>
-    <template v-else>
-      <img v-for="movie in store.movies" :id="movie.id" @click="openModal(movie.id)"
-        :src="`https://image.tmdb.org/t/p/w500${movie.image}`" />
-    </template>
-    <SiteModal v-if="showModal" @toggleModal="closeModal()" :id="selectedId" />
   </div>
 </template>
 
 <style scoped>
+.background {
+  height: 315vh;
+}
+
 h1 {
-  position: absolute;
   font-size: 3vw;
   margin-left: 25px;
   margin-top: 15px;
@@ -102,7 +108,7 @@ h1 {
   position: absolute;
   font-size: 1vw;
   margin-left: 25px;
-  margin-top: 105px;
+  margin-top: 35px;
   color: rgb(240, 199, 52);
 }
 
@@ -117,7 +123,7 @@ h1 {
   color: black;
   border-radius: 10px;
   margin-left: 91.5%;
-  margin-top: 25px;
+  margin-top: 10px;
 }
 
 .info {
@@ -125,7 +131,6 @@ h1 {
   color: rgb(240, 199, 52);
   font-size: 2vw;
   margin-left: 14.1vw;
-  margin-top: 98px;
 }
 
 img:hover,
@@ -138,7 +143,8 @@ img:hover,
 }
 
 .purchase-container {
-  margin-top: 150px;
+  height: 40vh;
+  margin-top: 28px;
   margin-left: 5.5rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -146,6 +152,7 @@ img:hover,
 }
 
 img {
+  margin-top: 55px;
   width: 250px;
   aspect-ratio: 2 / 3;
 }
@@ -153,7 +160,7 @@ img {
 input {
   position: absolute;
   margin-left: 20vw;
-  margin-top: 25px;
+  margin-top: 12px;
   padding: 7px;
   border-radius: 10px;
   width: 60vw;
@@ -163,7 +170,7 @@ input {
   position: absolute;
   text-align: center;
   margin-left: 81vw;
-  margin-top: 25px;
+  margin-top: 12px;
   background-color: white;
   padding: 7px;
   border-radius: 10px;
@@ -177,7 +184,7 @@ select {
   border-radius: 5px;
   padding: 3px;
   margin-left: 130px;
-  margin-top: 100px;
+  margin-top: 32px;
   font-size: 1vw;
 }
 
@@ -187,8 +194,7 @@ option {
 
 .navigation {
   position: absolute;
-  margin-top: 280vh;
-
+  margin-top: 270vh;
 }
 
 .prev,

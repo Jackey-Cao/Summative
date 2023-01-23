@@ -6,7 +6,7 @@ const store = useStore();
 
 <template>
   <h1 class="head">Cart</h1>
-  <div class="note" v-if="store.cart.size === 0" >
+  <div class="note" v-if="store.cart.size === 0">
     Your Cart Is Currently Empty.
   </div>
   <div class="page" v-else>
@@ -28,17 +28,16 @@ const store = useStore();
 }
 
 .page {
-  margin-top: 150px;
-  margin-left: 3rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  align-items: center;
 }
 
 img {
+  margin-top: 125px;
   width: 300px;
-  aspect-ratio: 2 / 3;
-  margin-left: 10rem;
-  margin-top: 100px;
+  aspect-ratio: 2/3;
 }
 
 h1 {
@@ -52,7 +51,8 @@ button {
   background-color: rgb(240, 199, 52);
   width: 80px;
   height: 40px;
-  margin-left: 17rem;
+  margin-top: 15px;
+  margin-left: 7rem;
   font-size: 15px;
   font-weight: bold;
   color: black;
