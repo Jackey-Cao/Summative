@@ -21,31 +21,37 @@
   font-weight: bolder;
   background-color: rgb(240, 199, 52);
 }
+
 p {
   position: absolute;
   margin-left: 90%;
   padding-top: 30px;
 }
+
 a1 {
   position: absolute;
   padding-top: 7px;
   padding-left: 2vw;
 }
+
 a2 {
   position: absolute;
   padding-left: 2vw;
   padding-top: 30px;
 }
+
 a3 {
   position: absolute;
   padding-left: 2vw;
   padding-top: 53px;
 }
+
 a4 {
   position: absolute;
   padding-left: 23vw;
   padding-top: 30px;
 }
+
 a5 {
   position: absolute;
   padding-left: 56vw;

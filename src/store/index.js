@@ -13,7 +13,6 @@ export const useStore = defineStore('store', {
   actions: {
     async populateFirestore() {
       const genres = new Map([[28, "Action"], [10751, "Family"], [878, "Science Fiction"], [12, "Adventure"], [14, "Fantasy"]]);
-
       genres.forEach(async (value, key) => {
         let data = (await axios.get("https://api.themoviedb.org/3/discover/movie", {
           params: {
