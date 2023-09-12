@@ -55,15 +55,15 @@ let modalData =
   margin-left: 19vw;
   margin-top: 235px;
   background-color: rgb(61, 61, 61);
-  width: 800px;
-  height: 400px;
+  width: 1000px;
+  height: 510px;
   color: white;
 }
 
 .modal-outer-container .modal-inner-container .close-button {
   position: absolute;
-  right: 240px;
-  padding: 10px;
+  right: 385px;
+  padding: 15px;
   border: none;
   background: rgba(0, 0, 0, 0);
   font-weight: bold;
