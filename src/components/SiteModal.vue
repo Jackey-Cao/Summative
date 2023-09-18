@@ -90,39 +90,39 @@ img {
 
 .one {
   position: absolute;
-  margin-left: 250px;
-  margin-top: 15px;
+  margin-left: 375px;
+  margin-top: 25px;
 }
 
 .two {
   position: absolute;
-  margin-left: 590px;
-  margin-top: 15px;
+  margin-left: 715px;
+  margin-top: 25px;
 }
 
 .three {
   position: absolute;
-  margin-left: 250px;
-  margin-top: 65px;
+  margin-left: 375px;
+  margin-top: 75px;
 }
 
 .four {
   position: absolute;
-  margin-left: 590px;
-  margin-top: 65px;
+  margin-left: 715px;
+  margin-top: 75px;
 }
 
 .five {
   position: absolute;
-  margin-left: 250px;
-  margin-right: 300px;
+  margin-left: 375px;
+  margin-right: 475px;
   margin-top: 120px;
 }
 
 .buy-button {
   position: absolute;
-  margin-left: 450px;
-  margin-top: 260px;
+  margin-left: 600px;
+  margin-top: 360px;
   border-radius: 8px;
   padding: 15px;
   font-weight: bolder;
