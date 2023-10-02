@@ -71,7 +71,7 @@ h1 {
 .register {
   position: absolute;
   padding: 10px;
-  margin-top: 260px;
+  margin-top: 265px;
   margin-left: 55.2vw;
   background-color: rgb(61, 61, 61);
   color: white;
@@ -111,9 +111,9 @@ a {
 
 .google {
   position: absolute;
-  padding: 10px 82px 10px 82px;
+  padding: 10px 101px 10px 101px;
   margin-top: 123px;
-  margin-left: 10vw;
+  margin-left: 11vw;
   background-color: rgb(240, 199, 52);
   color: black;
   border-radius: 8px;

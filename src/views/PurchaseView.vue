@@ -152,7 +152,7 @@ img:hover,
 
 img {
   margin-top: 55px;
-  width: 250px;
+  width: 355px;
   aspect-ratio: 2 / 3;
 }
 
